@@ -33,15 +33,9 @@
 				// Fake initializing
 				setTimeout(function () {
 					$('body').addClass('initialized');
-					setMessage('Locating device&hellip;');
-				}, 1200);
-
-				// Fake device connected
-				setTimeout(function () {
-					$('body').addClass('connected');
-					$('#wavesim').appendTo('.main');
-					setMessage();
+					app.connect(null, setMessage);
 				}, 5400);
+
 
 				// Handle nav interaction
 				$('.navbar-list-item a').on('click', function(event) {
