@@ -63,6 +63,16 @@ body {
   font-family: 'Roboto', sans-serif;
 }
 
+.brand {
+  line-height: 1;
+}
+.brand .brand-wave {
+  color: rgb(0,200,100);
+  font-size: 200%;
+  line-height: 0;
+  vertical-align: text-bottom;
+}
+
 /**
  * Message
  */
@@ -83,11 +93,6 @@ body {
 
 .message.active {
   opacity: 1;
-}
-
-.message-indicator {
-  display: block;
-  font-size: 18pt;
 }
 
 /**
