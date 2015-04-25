@@ -64,6 +64,33 @@ body {
 }
 
 /**
+ * Message
+ */
+
+.message {
+  background-color: rgba(0,200,100,.1);
+  color: rgb(0,200,100);
+  text-align: center;
+  padding: 12px;
+  position: fixed;
+  top: 50%;
+  left: 0;
+  right: 0;
+  margin-top: -48px;
+  opacity: 0;
+  -webkit-transition: opacity 350ms;
+}
+
+.message.active {
+  opacity: 1;
+}
+
+.message-indicator {
+  display: block;
+  font-size: 18pt;
+}
+
+/**
  * Titlebar
  */
 
@@ -116,7 +143,7 @@ body.initialized .titlebar {
   -webkit-transition: bottom 350ms;
 }
 
-body.initialized .navbar {
+body.connected .navbar {
   bottom: 0;
 }
 

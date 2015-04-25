@@ -22,6 +22,59 @@
 		<script src="libs/easy-ble.js"></script>
 		<script src="app.js"></script>
 
+		<script>
+			$(function () {
+
+				// Fake app startup
+				setTimeout(function () {
+					setMessage('Starting up&hellip;');
+				}, 0);
+
+				// Fake initializing
+				setTimeout(function () {
+					$('body').addClass('initialized');
+					setMessage('Locating device&hellip;');
+				}, 1200);
+
+				// Fake device connected
+				setTimeout(function () {
+					$('body').addClass('connected');
+					$('#wavesim').appendTo('.main');
+					setMessage();
+				}, 5400);
+
+				// Handle nav interaction
+				$('.navbar-list-item a').on('click', function(event) {
+
+					// Move a new view into main
+					$('.main .view').appendTo('body');
+					$($(this).attr('href')).appendTo('.main');
+
+					// Set active state on menu item
+					$('.navbar-list-item').removeClass('active');
+					$(this).parent().addClass('active');
+				});
+
+			});
+
+			// Handle messaging
+			var setMessage = function(msg) {
+				var $message = $('.message');
+				var $messageText = $('.message-text', $message);
+
+				// Kill message if no string
+				if (!msg || msg === '') {
+					$message.removeClass('active');
+					$messageText.html('&nbsp;');
+				}
+				// Otherwise show message
+				else {
+					$message.addClass('active');
+					$messageText.html(msg);
+				}
+			}
+		</script>
+
 	</head>
 
 	<body ontouchstart="">
@@ -31,8 +84,9 @@
 		</header>
 
 		<main class="main">
-			<div class="view" id="view-appinit">
-				<span class="status">Locating device&hellip;</span>
+			<div class="message">
+				<span class="message-indicator"></span>
+				<span class="message-text"></span>
 			</div>
 		</main>
 
@@ -43,8 +97,8 @@
 			</ul>
 		</nav>
 
-		<div class="view" id="view-wavesim">WaveSim</div>
-		<div class="view" id="view-command">Command</div>
+		<div class="view" id="wavesim">WaveSim</div>
+		<div class="view" id="command">Command</div>
 
 	</body>
 
