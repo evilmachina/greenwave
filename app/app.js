@@ -42,6 +42,7 @@ app.getScratchCharacteristicUUID = function(scratchNumber) {
 
 app.initialize = function() {
 	app.connected = false;
+	app.connect();
 	$('body').addClass('initialized');
 }
 
@@ -50,9 +51,8 @@ app.deviceIsLightBlueBeanWithBleId = function(device, bleId) {
 	return ((device != null) && (device.name != null) && (device.name == bleId));
 };
 
-app.connect = function(user, setMessage)
+app.connect = function(user)
 {
-	setMessage("blob");
 	var BLEId = "Green Wave";
 	app.showInfo('Trying to connect to "' + BLEId +'"');
 	
@@ -112,9 +112,6 @@ app.connect = function(user, setMessage)
 			device.connect(onConnectSuccess, onConnectFailure);
 		};
 	};
-
-
-	setMessage("blob2");
 	function onScanFailure(errorCode) {
 
 		// Show an error message to the user
@@ -123,7 +120,6 @@ app.connect = function(user, setMessage)
 	};
 
 	// Update the user interface
-	setMessage('Scanning...');
 	app.showInfo('Scanning...');
 	
 

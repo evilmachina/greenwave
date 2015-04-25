@@ -26,15 +26,18 @@
 			$(function () {
 
 				// Fake app startup
-				setTimeout(function () {
-					setMessage('Starting up&hellip;');
-				}, 0);
+				// setTimeout(function () {
+				// 	setMessage('Starting up&hellip;');
+				// }, 0);
 
 				// Fake initializing
-				setTimeout(function () {
-					$('body').addClass('initialized');
-					app.connect(null, setMessage);
-				}, 5400);
+				// setTimeout(function () {
+				// 	$('body').addClass('initialized');
+				// 	app.connect(null, setMessage);
+				// }, 5400);
+
+				setTimeout(function(){app.sendStatus(1)}, 3000);
+				setTimeout(function(){app.sendStatus(4)}, 6000);
 
 
 				// Handle nav interaction

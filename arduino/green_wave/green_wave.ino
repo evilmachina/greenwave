@@ -28,10 +28,6 @@ void loop() {
   bool connected = Bean.getConnectionState();
   
   if(connected) {
-    one();
-    delay(1000);
-    two();
-    delay(1000);
     Bean.setLed(0, 255, 0);
     ScratchData receivedData = Bean.readScratchData(statusScratch); 
 
@@ -73,6 +69,7 @@ void loop() {
         // default is optional
     }
     oldStatus = status;
+    Bean.sleep(500);
   }else {
     matrix.clear();
     matrix.writeDisplay();
