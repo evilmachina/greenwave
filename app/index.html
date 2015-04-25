@@ -13,8 +13,9 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
-    <link rel="stylesheet" href="css/normalize.css">
-    <link rel="stylesheet" href="css/main.css">
+		<link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Roboto:500,300&subset=latin'>
+    <link rel="stylesheet" href="ui/normalize.css">
+    <link rel="stylesheet" href="ui/main.css">
 
 		<script src="cordova.js"></script>
 		<script src="libs/easy-ble.js"></script>
@@ -24,16 +25,19 @@
 
 	<body ontouchstart="">
 
-		<header class="header">
-			<h1>Green Wave</h1>
+		<header class="titlebar">
+			<h1 class="titlebar-heading">Green Wave</h1>
 		</header>
 
-		<main class="main"></main>
+		<main class="main">
+			foo<hr>foo<hr>foo<hr>foo<hr>foo<hr>foo<hr>foo<hr>foo<hr>foo<hr>foo<hr>foo<hr>foo<hr>foo<hr>
+			foo<hr>foo<hr>foo<hr>foo<hr>foo<hr>foo<hr>foo<hr>foo<hr>foo<hr>foo<hr>foo<hr>foo<hr>foo<hr>
+		</main>
 
-		<nav class="nav">
-			<ul>
-				<li class="active"><a href="#wavesim">WaveSim</a></li>
-				<li><a href="#command">Command</a></li>
+		<nav class="navbar">
+			<ul class="navbar-list">
+				<li class="navbar-list-item active"><a href="#wavesim">WaveSim</a></li>
+				<li class="navbar-list-item"><a href="#command">Command</a></li>
 			</ul>
 		</nav>
 
