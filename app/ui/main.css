@@ -1,0 +1,161 @@
+/*
+ * HTML5 Boilerplate
+ *
+ * What follows is the result of much research on cross-browser styling.
+ * Credit left inline and big thanks to Nicolas Gallagher, Jonathan Neal,
+ * Kroc Camen, and the H5BP dev community and team.
+ */
+
+/* ==========================================================================
+   Base styles: opinionated defaults
+   ========================================================================== */
+
+html,
+button,
+input,
+select,
+textarea {
+  color: #222;
+}
+
+body {
+  font-size: 1em;
+  line-height: 1.4;
+}
+
+a {
+  color: #00e;
+}
+
+a:visited {
+  color: #551a8b;
+}
+
+a:hover {
+  color: #06e;
+}
+
+/*
+ * Remove the gap between images and the bottom of their containers: h5bp.com/i/440
+ */
+
+img {
+  vertical-align: middle;
+}
+
+/*
+ * Remove default fieldset styles.
+ */
+
+fieldset {
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+
+
+/* ==========================================================================
+   Main application styles
+   ========================================================================== */
+
+
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+/**
+ * Titlebar
+ */
+
+.titlebar {
+  background-color: rgba(255,255,255,.8);
+  border-bottom: 2px solid rgba(0,200,100,.4);
+  color: rgba(0,0,0,.8);
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+}
+
+.titlebar-heading {
+  margin: 0;
+  padding: 14px 12px 10px;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 300;
+  font-size: 18pt;
+  line-height: 1;
+  letter-spacing: 2px;
+}
+
+/**
+ * Main
+ */
+
+.main {
+  padding-top: 50px; /* total height of navbar */
+  padding-bottom: 69px; /* total height of navbar */
+}
+
+/**
+ * Navbar
+ */
+
+.navbar {
+  background-color: rgba(255,255,255,.8);
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  display: table;
+}
+
+.navbar-list {
+  list-style-type: none;
+  padding-left: 0;
+  margin: 0;
+  display: table-row;
+}
+
+.navbar-list-item {
+  display: table-cell;
+  text-align: center;
+  font-weight: 500;
+  font-size: 14pt;
+  line-height: 1;
+  border-collapse: collapse;
+  border-left: 1px solid rgba(0,200,100,.4);
+  border-top: 2px solid rgba(0,200,100,.4);
+}
+
+.navbar-list-item:first-child {
+  border-left: none;
+}
+
+.navbar-list-item a {
+  display: block;
+  padding: 24px 12px;
+  text-decoration: none;
+  color: rgba(0,200,100,.8);
+}
+
+
+/* ==========================================================================
+   Helper classes
+   ========================================================================== */
+
+
+/**
+ * Clearfix helper
+ * Used to contain floats: h5bp.com/q
+ */
+
+.clearfix:before,
+.clearfix:after {
+  content: "";
+  display: table;
+}
+
+.clearfix:after {
+  clear: both;
+}
