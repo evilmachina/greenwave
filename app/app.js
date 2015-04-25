@@ -50,11 +50,12 @@ app.deviceIsLightBlueBeanWithBleId = function(device, bleId) {
 	return ((device != null) && (device.name != null) && (device.name == bleId));
 };
 
-app.connect = function(user)
+app.connect = function(user, setMessage)
 {
-	var BLEId = document.getElementById('BLEId').value
+	setMessage("blob");
+	var BLEId = "Green Wave";
 	app.showInfo('Trying to connect to "' + BLEId +'"');
-
+	
 	app.disconnect(user);
 
 	function onScanSuccess(device) {
@@ -65,20 +66,18 @@ app.connect = function(user)
 
 				// Update user interface
 				app.showInfo('Connected to <i>' + BLEId + '</i>');
-				document.getElementById('BLEButton').innerHTML = 'Disconnect';
-				document.getElementById('BLEButton').onclick = new Function('app.disconnect()');
-				document.getElementById('ledControl').style.display = 'block';
-				document.getElementById('temperatureDisplay').style.display = 'block';
+				setTimeout(function(){
+					setMessage();
+				}, 3000);
+				// document.getElementById('BLEButton').innerHTML = 'Disconnect';
+				// document.getElementById('BLEButton').onclick = new Function('app.disconnect()');
+				// document.getElementById('ledControl').style.display = 'block';
+				// document.getElementById('temperatureDisplay').style.display = 'block';
 
 				// Application is now connected
 				app.connected = true;
 				app.device = device;
 
-				// Fetch current LED values.
-				app.synchronizeLeds();
-
-				// Create an interval timer to periocally read temperature.
-				app.interval = setInterval(function() { app.readTemperature(); }, 500);
 			};
 
 			function onServiceFailure(errorCode) {
@@ -100,7 +99,7 @@ app.connect = function(user)
 		console.log('device.name =' + device.name);
 
 		// Connect if we have found a LightBlue Bean with the name from input (BLEId)
-		if (app.deviceIsLightBlueBeanWithBleId(device, document.getElementById('BLEId').value)) {
+		if (app.deviceIsLightBlueBeanWithBleId(device, BLEId)) {
 
 			// Update user interface
 			app.showInfo('Found "' + device.name + '"');
@@ -114,6 +113,8 @@ app.connect = function(user)
 		};
 	};
 
+
+	setMessage("blob2");
 	function onScanFailure(errorCode) {
 
 		// Show an error message to the user
@@ -122,7 +123,9 @@ app.connect = function(user)
 	};
 
 	// Update the user interface
+	setMessage('Scanning...');
 	app.showInfo('Scanning...');
+	
 
 	// Start scanning for devices
 	easyble.startScan(onScanSuccess, onScanFailure);
@@ -140,8 +143,8 @@ app.disconnect = function(user) {
 	app.device = null;
 
 	// Hide user inteface
-	document.getElementById('ledControl').style.display = 'none';
-	document.getElementById('temperatureDisplay').style.display = 'none';
+	// document.getElementById('ledControl').style.display = 'none';
+	// document.getElementById('temperatureDisplay').style.display = 'none';
 
 	// Stop any ongoing scan and close devices.
 	easyble.stopScan();
@@ -149,67 +152,14 @@ app.disconnect = function(user) {
 
 	// Update user interface
 	app.showInfo('Not connected');
-	document.getElementById('BLEButton').innerHTML = 'Connect';
-	document.getElementById('BLEButton').onclick = new Function('app.connect()');
+	// document.getElementById('BLEButton').innerHTML = 'Connect';
+	// document.getElementById('BLEButton').onclick = new Function('app.connect()');
 };
 
-app.readTemperature = function() {
 
-	function onDataReadSuccess(data) {
-
-		var temperatureData = new Uint8Array(data);
-		var temperature = temperatureData[0];
-		console.log('Temperature read: ' + temperature + ' C');
-		document.getElementById('temperature').innerHTML = temperature
-	}
-
-	function onDataReadFailure(errorCode){
-
-		console.log('Failed to read temperature with error: ' + errorCode);
-		app.disconnect();
-	};
-
-	app.readDataFromScratch(2, onDataReadSuccess, onDataReadFailure);
-};
-
-app.synchronizeLeds = function() {
-
-	function onDataReadSuccess(data) {
-
-		var ledData = new Uint8Array(data);
-
-		document.getElementById('redLed').value = ledData[0];
-		document.getElementById('greenLed').value = ledData[1];
-		document.getElementById('blueLed').value = ledData[2];
-
-		console.log('Led synchronized.');
-	};
-
-	function onDataReadFailure(errorCode){
-
-		console.log('Failed to synchronize leds with error: ' + errorCode);
-		app.disconnect();
-	};
-
-	app.readDataFromScratch(1, onDataReadSuccess, onDataReadFailure);
-};
-
-app.sendLedUpdate = function() {
-
+app.sendStatus = function(data){
 	if (app.connected) {
-
-		// Fetch LED values from UI
-		redLed = document.getElementById('redLed').value
-		greenLed = document.getElementById('greenLed').value
-		blueLed = document.getElementById('blueLed').value
-
-		// Print out fetched LED values
-		console.log('redLed: ' + redLed + ', greenLed: ' + greenLed + ', blueLed: ' + blueLed);
-
-		// Create packet to send
-		data = new Uint8Array([redLed, greenLed, blueLed]);
-
-		// Callbacks
+		var data = new Uint8Array([data, 0, 0]);
 		function onDataWriteSuccess() {
 
 			console.log('Succeded to write data.');
@@ -223,14 +173,8 @@ app.sendLedUpdate = function() {
 
 		app.writeDataToScratch(1, data, onDataWriteSuccess, onDataWriteFailure);
 	}
-	else {
-
-		redLed = document.getElementById('redLed').value = 0
-		greenLed = document.getElementById('greenLed').value = 0
-		blueLed = document.getElementById('blueLed').value = 0
-	};
-
 };
+
 
 app.writeDataToScratch = function(scratchNumber, data, succesCallback, failCallback) {
 
@@ -245,21 +189,11 @@ app.writeDataToScratch = function(scratchNumber, data, succesCallback, failCallb
 	};
 };
 
-app.readDataFromScratch = function(scratchNumber, successCallback, failCallback) {
 
-	if(app.connected) {
-
-		console.log('Trying to read data from scratch ' + scratchNumber);
-		app.device.readCharacteristic(app.getScratchCharacteristicUUID(scratchNumber), successCallback, failCallback);
-	}
-	else {
-
-		console.log('Not connected to device, cant read data from scratch.');
-	};
-};
 
 app.showInfo = function(info) {
 
-	console.log(info)
-	document.getElementById('BLEStatus').innerHTML = info;
+	//console.log(info)
+	//document.getElementById('BLEStatus').innerHTML = info;
+	setMessage(info);
 };

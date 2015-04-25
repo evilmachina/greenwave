@@ -6,54 +6,80 @@
 
 Adafruit_BicolorMatrix matrix = Adafruit_BicolorMatrix();
 
+String beanName = "Green Wave";
+const uint8_t statusScratch = 1;
 
 void setup() {
 
-  // put your setup code here, to run once:
- Serial.begin(9600);
-  Serial.println("8x8 LED Matrix Test");
-  
   matrix.begin(0x70);  // pass in the address
 
+  Bean.setBeanName(beanName);
+  Bean.enableWakeOnConnect(true);
 
+  // Reset the scratch data area 1. 
+  uint8_t resetLedBuffer[] = {0, 0, 0};
+  Bean.setScratchData(statusScratch, resetLedBuffer, 3);
 }
 
+uint8_t oldStatus = 0;
 
 void loop() {
 
+  bool connected = Bean.getConnectionState();
+  
+  if(connected) {
+    one();
+    delay(1000);
+    two();
+    delay(1000);
+    Bean.setLed(0, 255, 0);
+    ScratchData receivedData = Bean.readScratchData(statusScratch); 
 
-  one();
-  delay(1000);
+    uint8_t status = receivedData.data[0];
 
-  two();
-  delay(1000);
+    if(status != oldStatus)
 
-  tree();
-  delay(1000);
-
-
-  foure();
-  delay(1000);
-
-
-  five();
-  delay(1000);
-
-
-  six();
-  delay(1000);
-
-
-  seven();
-  delay(1000);
-
-  eight();
-  delay(1000);
-
-
-  nine();
-  delay(1000);
-
+    switch (status) {
+      case 1:
+        one();
+        break;
+      case 2:
+        two();
+        break;
+      case 3:
+        tree();
+        break;
+      case 4:
+        foure();
+        break;
+      case 5:
+        five();
+        break;
+      case 6:
+        six();
+        break;
+      case 7:
+        seven();
+        break;
+      case 8:
+        eight();
+        break;
+      case 9:
+        nine();
+        break;
+      default:
+         break; 
+        // if nothing else matches, do the default
+        // default is optional
+    }
+    oldStatus = status;
+  }else {
+    matrix.clear();
+    matrix.writeDisplay();
+    // Turn LED off and put to sleep. 
+    Bean.setLed(255, 0, 0);
+    Bean.sleep(0xFFFFFFFF); 
+  }
 }
 
 void one(){
