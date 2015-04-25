@@ -165,17 +165,16 @@ body.connected .navbar {
 
 .navbar-list-item a {
   color: rgba(0,200,100,.8);
-  border-top: 8px solid transparent;
-  border-bottom: 0 solid rgb(0,200,100);
-  -webkit-transition: border-width 350ms, color 350ms;
+  border-bottom: 0px solid rgb(0,200,100);
+  -webkit-transition: border-bottom-width 350ms, padding-bottom 350ms, color 350ms;
   display: block;
   padding: 16px 12px;
   text-decoration: none;
 }
 
 .navbar-list-item.active a {
-  border-top-width: 0;
   border-bottom-width: 8px;
+  padding-bottom: 8px;
   color: rgb(0,200,100);
 }
 
