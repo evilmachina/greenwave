@@ -55,7 +55,7 @@ fieldset {
 
 
 /* ==========================================================================
-   Main application styles
+   Main frame
    ========================================================================== */
 
 
@@ -72,9 +72,14 @@ body {
   border-bottom: 2px solid rgba(0,200,100,.4);
   color: rgba(0,0,0,.8);
   position: fixed;
-  top: 0;
+  top: -55px; /* total height + safety margin */
   right: 0;
   left: 0;
+  -webkit-transition: top 350ms;
+}
+
+body.initialized .titlebar {
+  top: 0;
 }
 
 .titlebar-heading {
@@ -103,11 +108,16 @@ body {
 
 .navbar {
   background-color: rgba(255,255,255,.8);
+  display: table;
   position: fixed;
-  bottom: 0;
+  bottom: -75px;
   right: 0;
   width: 100%;
-  display: table;
+  -webkit-transition: bottom 350ms;
+}
+
+body.initialized .navbar {
+  bottom: 0;
 }
 
 .navbar-list {
@@ -123,22 +133,36 @@ body {
   font-weight: 500;
   font-size: 14pt;
   line-height: 1;
-  border-collapse: collapse;
-  border-left: 1px solid rgba(0,200,100,.4);
   border-top: 2px solid rgba(0,200,100,.4);
 }
 
-.navbar-list-item:first-child {
-  border-left: none;
-}
-
 .navbar-list-item a {
-  display: block;
-  padding: 24px 12px;
-  text-decoration: none;
   color: rgba(0,200,100,.8);
+  border-top: 8px solid transparent;
+  border-bottom: 0 solid rgb(0,200,100);
+  -webkit-transition: border-width 350ms, color 350ms;
+  display: block;
+  padding: 16px 12px;
+  text-decoration: none;
 }
 
+.navbar-list-item.active a {
+  border-top-width: 0;
+  border-bottom-width: 8px;
+  color: rgb(0,200,100);
+}
+
+/* ==========================================================================
+   Views
+   ========================================================================== */
+
+.view {
+  display: none;
+}
+
+.main .view {
+  display: block;
+}
 
 /* ==========================================================================
    Helper classes
