@@ -131,8 +131,8 @@ body.initialized .titlebar {
  */
 
 .main {
-  padding-top: 50px; /* total height of navbar */
-  padding-bottom: 69px; /* total height of navbar */
+  padding-top: 52px; /* total height of navbar */
+  padding-bottom: 53px; /* total height of navbar */
 }
 
 /**
@@ -199,32 +199,30 @@ body.connected .navbar {
 }
 
 .command-list-item button {
-  display: block;
+  background-color: transparent;
   border: none;
   color: rgb(255,255,255);
-  font-size: 14pt;
-  text-align: center;
-  vertical-align: middle;
-  padding-top: 16px;
+  display: block;
+  width: 100%;
+  padding: 4px 16px;
   margin-right: auto;
   margin-left: auto;
+  font-size: 24pt;
+  text-align: center;
+  vertical-align: middle;
 }
 
 .command-list-item button.button-green {
-  background-color: mediumspringgreen;
-  width: 100%;
+  color: mediumspringgreen;
 }
 .command-list-item button.button-yellow {
-  background-color: gold;
-  width: 80%;
+  color: gold;
 }
 .command-list-item button.button-orange {
-  background-color: darkorange;
-  width: 60%;
+  color: darkorange;
 }
 .command-list-item button.button-red {
-  background-color: orangered;
-  width: 40%;
+  color: orangered;
 }
 
 /* ==========================================================================

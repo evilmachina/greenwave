@@ -83,6 +83,7 @@ app.connect = function(user)
 				// Application is now connected
 				app.connected = true;
 				app.device = device;
+				app.sendStatus(5);
 
 			};
 
@@ -154,6 +155,7 @@ app.disconnect = function(user) {
 
 	// Update user interface
 	app.showInfo('Not connected');
+
 	// document.getElementById('BLEButton').innerHTML = 'Connect';
 	// document.getElementById('BLEButton').onclick = new Function('app.connect()');
 };
