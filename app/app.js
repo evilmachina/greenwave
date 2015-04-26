@@ -41,7 +41,7 @@ app.getScratchCharacteristicUUID = function(scratchNumber) {
 };
 
 app.initialize = function() {
-	
+
 	app.showInfo("Initialize");
 	app.connected = false;
 	app.connect();
@@ -57,7 +57,7 @@ app.connect = function(user)
 {
 	var BLEId = "Green Wave";
 	app.showInfo('Trying to connect to "' + BLEId +'"');
-	
+
 	app.disconnect(user);
 
 	function onScanSuccess(device) {
@@ -68,9 +68,13 @@ app.connect = function(user)
 
 				// Update user interface
 				app.showInfo('Connected to <i>' + BLEId + '</i>');
+				$('body').addClass('connected');
 				setTimeout(function(){
 					setMessage();
-				}, 3000);
+					$('#command').appendTo('.main');
+					$('a[href$="#command"]', '.navbar').parent().addClass('active');
+				}, 2400);
+
 				// document.getElementById('BLEButton').innerHTML = 'Disconnect';
 				// document.getElementById('BLEButton').onclick = new Function('app.disconnect()');
 				// document.getElementById('ledControl').style.display = 'block';
@@ -123,7 +127,7 @@ app.connect = function(user)
 
 	// Update the user interface
 	app.showInfo('Scanning...');
-	
+
 
 	// Start scanning for devices
 	easyble.startScan(onScanSuccess, onScanFailure);

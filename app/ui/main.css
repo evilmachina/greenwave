@@ -71,6 +71,7 @@ body {
   font-size: 200%;
   line-height: 0;
   vertical-align: text-bottom;
+  text-decoration: none;
 }
 
 /**
@@ -178,9 +179,52 @@ body.connected .navbar {
 }
 
 .navbar-list-item.active a {
-  border-bottom-width: 8px;
-  padding-bottom: 8px;
+  border-bottom-width: 6px;
+  padding-bottom: 10px;
   color: rgb(0,200,100);
+}
+
+/**
+ * Command list
+ */
+.command-list {
+  list-style-type: none;
+  margin: 0;
+  margin-top: 24px;
+  padding-left: 0;
+}
+
+.command-list-item {
+  margin-bottom: 1px;
+}
+
+.command-list-item button {
+  display: block;
+  border: none;
+  color: rgb(255,255,255);
+  font-size: 14pt;
+  text-align: center;
+  vertical-align: middle;
+  padding-top: 16px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.command-list-item button.button-green {
+  background-color: mediumspringgreen;
+  width: 100%;
+}
+.command-list-item button.button-yellow {
+  background-color: gold;
+  width: 80%;
+}
+.command-list-item button.button-orange {
+  background-color: darkorange;
+  width: 60%;
+}
+.command-list-item button.button-red {
+  background-color: orangered;
+  width: 40%;
 }
 
 /* ==========================================================================
