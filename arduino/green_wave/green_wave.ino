@@ -11,14 +11,21 @@ const uint8_t statusScratch = 1;
 
 void setup() {
 
-  matrix.begin(0x70);  // pass in the address
-
   Bean.setBeanName(beanName);
   Bean.enableWakeOnConnect(true);
+  Bean.setLed(0, 0, 255);
+  matrix.begin(0x70);  // pass in the address
 
   // Reset the scratch data area 1. 
   uint8_t resetLedBuffer[] = {0, 0, 0};
   Bean.setScratchData(statusScratch, resetLedBuffer, 3);
+  
+  runWaveAnimation();
+  runWaveAnimation();
+  runWaveAnimation();
+  runWaveAnimation();
+  runWaveAnimation();
+  clearMatrix();
 }
 
 uint8_t oldStatus = 0;
@@ -71,12 +78,146 @@ void loop() {
     oldStatus = status;
     Bean.sleep(500);
   }else {
-    matrix.clear();
-    matrix.writeDisplay();
+    clearMatrix();
     // Turn LED off and put to sleep. 
     Bean.setLed(255, 0, 0);
     Bean.sleep(0xFFFFFFFF); 
   }
+}
+
+
+static const uint8_t PROGMEM
+  green_wave_1_bmp[] =
+  { B00000000,
+    B00000000,
+    B00000000,
+    B01100000,
+    B10011001,
+    B00000110,
+    B00000000,
+    B00000000 },
+  green_wave_2_bmp[] =
+  { B00000000,
+    B00000000,
+    B00000000,
+    B00110000,
+    B11001100,
+    B00000011,
+    B00000000,
+    B00000000 },
+  green_wave_3_bmp[] =
+  { B00000000,
+    B00000000,
+    B00000000,
+    B00011000,
+    B01100110,
+    B10000001,
+    B00000000,
+    B00000000 },
+    
+  green_wave_4_bmp[] =
+  { B00000000,
+    B00000000,
+    B00000000,
+    B00001100,
+    B00110011,
+    B11000000,
+    B00000000,
+    B00000000 },
+    
+
+ green_wave_5_bmp[] =
+  { B00000000,
+    B00000000,
+    B00000000,
+    B00000110,
+    B10011001,
+    B01100000,
+    B00000000,
+    B00000000 },
+    
+    
+ green_wave_6_bmp[] =
+  { B00000000,
+    B00000000,
+    B00000000,
+    B00000011,
+    B11001100,
+    B00110000,
+    B00000000,
+    B00000000 },
+ 
+ green_wave_7_bmp[] =
+ {  B00000000,
+    B00000000,
+    B00000000,
+    B10000001,
+    B01100110,
+    B00011000,
+    B00000000,
+    B00000000 },
+    
+  green_wave_8_bmp[] =
+ {  B00000000,
+    B00000000,
+    B00000000,
+    B11000000,
+    B00110011,
+    B00001100,
+    B00000000,
+    B00000000 };
+
+void runWaveAnimation(){
+        matrix.clear();
+        matrix.drawBitmap(0, 0, green_wave_1_bmp, 8, 8, LED_GREEN);
+        matrix.writeDisplay();
+        delay(200);
+        
+        
+        matrix.clear();
+        matrix.drawBitmap(0, 0, green_wave_2_bmp, 8, 8, LED_GREEN);
+        matrix.writeDisplay();
+        delay(200);
+        
+        
+        matrix.clear();
+        matrix.drawBitmap(0, 0, green_wave_3_bmp, 8, 8, LED_GREEN);
+        matrix.writeDisplay();
+        delay(200);
+        
+        matrix.clear();
+        matrix.drawBitmap(0, 0, green_wave_4_bmp, 8, 8, LED_GREEN);
+        matrix.writeDisplay();
+        delay(200);
+        
+        
+        matrix.clear();
+        matrix.drawBitmap(0, 0, green_wave_5_bmp, 8, 8, LED_GREEN);
+        matrix.writeDisplay();
+        delay(200);
+        
+        
+        matrix.clear();
+        matrix.drawBitmap(0, 0, green_wave_6_bmp, 8, 8, LED_GREEN);
+        matrix.writeDisplay();
+        delay(200);
+        
+        
+        matrix.clear();
+        matrix.drawBitmap(0, 0, green_wave_7_bmp, 8, 8, LED_GREEN);
+        matrix.writeDisplay();
+        delay(200);
+        
+        
+        matrix.clear();
+        matrix.drawBitmap(0, 0, green_wave_8_bmp, 8, 8, LED_GREEN);
+        matrix.writeDisplay();
+        delay(200);
+}
+
+void clearMatrix(){
+    matrix.clear();
+    matrix.writeDisplay();
 }
 
 void one(){
