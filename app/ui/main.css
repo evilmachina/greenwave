@@ -179,8 +179,8 @@ body.connected .navbar {
 }
 
 .navbar-list-item.active a {
-  border-bottom-width: 8px;
-  padding-bottom: 8px;
+  border-bottom-width: 6px;
+  padding-bottom: 10px;
   color: rgb(0,200,100);
 }
 

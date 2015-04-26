@@ -71,7 +71,11 @@ app.connect = function(user)
 				$('body').addClass('connected');
 				setTimeout(function(){
 					setMessage();
-				}, 3000);
+				}, 2400);
+
+				$('#command').appendTo('.main');
+				$('a[href$="#command"]', '.navbar').parent().addClass('active');
+
 				// document.getElementById('BLEButton').innerHTML = 'Disconnect';
 				// document.getElementById('BLEButton').onclick = new Function('app.disconnect()');
 				// document.getElementById('ledControl').style.display = 'block';
