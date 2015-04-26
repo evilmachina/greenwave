@@ -41,6 +41,8 @@ app.getScratchCharacteristicUUID = function(scratchNumber) {
 };
 
 app.initialize = function() {
+	
+	app.showInfo("Initialize");
 	app.connected = false;
 	app.connect();
 	$('body').addClass('initialized');
